@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 6
+names: ['Sprite', 'coca_cola', 'goodday', 'green_chips', 'green_milk', 'lifebuoy']
+
+roboflow:
+  workspace: mohamed-hafiz
+  project: retailedgeai-rdjhl
+  version: 3
+  license: Private
+  url: https://app.roboflow.com/mohamed-hafiz/retailedgeai-rdjhl/3

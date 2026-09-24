@@ -1,0 +1,3393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>RetailEdge AI</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background:
+        #f4f6fa;
+
+    color:
+        #182230;
+
+}
+
+
+/* =====================================================
+   LAYOUT
+   ===================================================== */
+
+.app {
+
+    display: flex;
+
+    min-height: 100vh;
+
+}
+
+
+.sidebar {
+
+    width: 240px;
+
+    background:
+        #111827;
+
+    color: white;
+
+    padding: 22px 14px;
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    bottom: 0;
+
+}
+
+
+.logo {
+
+    padding:
+        10px;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.logo h1 {
+
+    margin:
+        0;
+
+    font-size:
+        23px;
+
+}
+
+
+.logo p {
+
+    margin-top:
+        5px;
+
+    color:
+        #9ca3af;
+
+    font-size:
+        12px;
+
+}
+
+
+.nav button {
+
+    width: 100%;
+
+    padding:
+        13px 14px;
+
+    border: 0;
+
+    border-radius:
+        8px;
+
+    background:
+        transparent;
+
+    color:
+        #d1d5db;
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+
+    margin-bottom:
+        5px;
+
+    font-size:
+        14px;
+
+}
+
+
+.nav button:hover {
+
+    background:
+        #1f2937;
+
+    color:
+        white;
+
+}
+
+
+.nav button.active {
+
+    background:
+        #2563eb;
+
+    color:
+        white;
+
+}
+
+
+.content {
+
+    margin-left:
+        240px;
+
+    width:
+        calc(100% - 240px);
+
+    padding:
+        25px;
+
+}
+
+
+.topbar {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        22px;
+
+}
+
+
+.topbar h2 {
+
+    margin:
+        0;
+
+    font-size:
+        28px;
+
+}
+
+
+.edge-badge {
+
+    background:
+        #e7efff;
+
+    color:
+        #1d4ed8;
+
+    padding:
+        8px 12px;
+
+    border-radius:
+        20px;
+
+    font-size:
+        12px;
+
+    font-weight:
+        bold;
+
+}
+
+
+/* =====================================================
+   PAGE
+   ===================================================== */
+
+.page {
+
+    display:
+        none;
+
+}
+
+
+.page.active {
+
+    display:
+        block;
+
+}
+
+
+/* =====================================================
+   CARDS
+   ===================================================== */
+
+.metric-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            6,
+            1fr
+        );
+
+    gap:
+        14px;
+
+}
+
+
+.card {
+
+    background:
+        white;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        15px;
+
+    padding:
+        20px;
+
+    box-shadow:
+        0 7px 24px
+        rgba(
+            0,
+            0,
+            0,
+            0.06
+        );
+
+}
+
+
+.metric-label {
+
+    color:
+        #6b7280;
+
+    font-size:
+        13px;
+
+}
+
+
+.metric-value {
+
+    font-size:
+        28px;
+
+    font-weight:
+        800;
+
+    margin-top:
+        8px;
+
+}
+
+
+.grid2 {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        16px;
+
+    margin-top:
+        16px;
+
+}
+
+
+.grid3 {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            1fr
+        );
+
+    gap:
+        16px;
+
+}
+
+
+.section-title {
+
+    font-size:
+        17px;
+
+    font-weight:
+        800;
+
+    margin-bottom:
+        16px;
+
+}
+
+
+/* =====================================================
+   TABLE
+   ===================================================== */
+
+table {
+
+    width:
+        100%;
+
+    border-collapse:
+        collapse;
+
+}
+
+
+th,
+td {
+
+    padding:
+        12px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    text-align:
+        left;
+
+    font-size:
+        13px;
+
+}
+
+
+th {
+
+    color:
+        #6b7280;
+
+}
+
+
+.good {
+
+    color:
+        #15803d;
+
+    font-weight:
+        bold;
+
+}
+
+
+.bad {
+
+    color:
+        #dc2626;
+
+    font-weight:
+        bold;
+
+}
+
+
+/* =====================================================
+   INPUTS
+   ===================================================== */
+
+input,
+select {
+
+    width:
+        100%;
+
+    padding:
+        13px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius:
+        9px;
+
+    font-size:
+        14px;
+
+}
+
+
+.big-input {
+
+    font-size:
+        19px;
+
+    padding:
+        16px;
+
+}
+
+
+button.primary {
+
+    border:
+        0;
+
+    background:
+        #2563eb;
+
+    color:
+        white;
+
+    padding:
+        11px 16px;
+
+    border-radius:
+        9px;
+
+    cursor:
+        pointer;
+
+    font-weight:
+        bold;
+
+}
+
+
+button.secondary {
+
+    border:
+        0;
+
+    background:
+        #eef2f7;
+
+    color:
+        #111827;
+
+    padding:
+        10px 14px;
+
+    border-radius:
+        9px;
+
+    cursor:
+        pointer;
+
+}
+
+
+button.danger {
+
+    border:
+        0;
+
+    background:
+        #dc2626;
+
+    color:
+        white;
+
+    padding:
+        10px 14px;
+
+    border-radius:
+        9px;
+
+    cursor:
+        pointer;
+
+}
+
+
+/* =====================================================
+   TROLLEY
+   ===================================================== */
+
+.trolley-container {
+
+    max-width:
+        760px;
+
+    margin:
+        auto;
+
+}
+
+
+.cart-item {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    padding:
+        14px 0;
+
+}
+
+
+.cart-item-title {
+
+    font-weight:
+        bold;
+
+}
+
+
+.cart-item-meta {
+
+    color:
+        #6b7280;
+
+    font-size:
+        12px;
+
+    margin-top:
+        4px;
+
+}
+
+
+.cart-total {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    padding-top:
+        18px;
+
+    font-size:
+        24px;
+
+    font-weight:
+        800;
+
+}
+
+
+.message {
+
+    margin-top:
+        12px;
+
+    min-height:
+        20px;
+
+}
+
+
+.success {
+
+    color:
+        #15803d;
+
+}
+
+
+.error {
+
+    color:
+        #dc2626;
+
+}
+
+
+/* =====================================================
+   ALERTS
+   ===================================================== */
+
+.alert {
+
+    padding:
+        13px;
+
+    border-radius:
+        9px;
+
+    background:
+        #fff7ed;
+
+    border-left:
+        4px solid #f59e0b;
+
+    margin-bottom:
+        9px;
+
+}
+
+
+.alert-danger {
+
+    background:
+        #fef2f2;
+
+    border-left-color:
+        #dc2626;
+
+}
+
+
+/* =====================================================
+   ZONES
+   ===================================================== */
+
+.zone {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    margin:
+        13px 0;
+
+}
+
+
+.zone-label {
+
+    width:
+        70px;
+
+    font-size:
+        13px;
+
+}
+
+
+.bar {
+
+    height:
+        12px;
+
+    flex:
+        1;
+
+    background:
+        #e5e7eb;
+
+    border-radius:
+        10px;
+
+    overflow:
+        hidden;
+
+}
+
+
+.bar-fill {
+
+    height:
+        100%;
+
+    background:
+        #2563eb;
+
+}
+
+
+/* =====================================================
+   DEMO BOX
+   ===================================================== */
+
+.demo-note {
+
+    padding:
+        12px;
+
+    background:
+        #eff6ff;
+
+    border-left:
+        4px solid #2563eb;
+
+    border-radius:
+        8px;
+
+    font-size:
+        13px;
+
+    margin-top:
+        12px;
+
+}
+
+
+.small {
+
+    font-size:
+        12px;
+
+    color:
+        #6b7280;
+
+}
+
+
+.form-group {
+
+    margin-bottom:
+        13px;
+
+}
+
+
+.button-row {
+
+    display:
+        flex;
+
+    gap:
+        8px;
+
+    flex-wrap:
+        wrap;
+
+}
+
+
+@media(max-width:1100px) {
+
+    .metric-grid {
+
+        grid-template-columns:
+            repeat(
+                3,
+                1fr
+            );
+
+    }
+
+}
+
+
+@media(max-width:800px) {
+
+    .sidebar {
+
+        position:
+            static;
+
+        width:
+            100%;
+
+    }
+
+
+    .app {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .content {
+
+        margin-left:
+            0;
+
+        width:
+            100%;
+
+    }
+
+
+    .grid2,
+    .grid3 {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .metric-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+    }
+
+    .content {
+
+        padding:
+            14px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+<!-- =====================================================
+     SIDEBAR
+     ===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h1>
+            RetailEdge AI
+        </h1>
+
+        <p>
+            Smart Shopping • Smarter Stores
+        </p>
+
+    </div>
+
+
+    <div class="nav">
+
+        <button
+            class="active"
+            onclick="openPage('overview', this)">
+            📊 Overview
+        </button>
+
+        <button
+            onclick="openPage('trolley', this)">
+            🛒 Smart Trolley
+        </button>
+
+        <button
+            onclick="openPage('inventory', this)">
+            📦 Inventory
+        </button>
+
+        <button
+            onclick="openPage('shelf', this)">
+            🏪 Shelf AI
+        </button>
+
+        <button
+            onclick="openPage('shopper', this)">
+            👥 Shopper Analytics
+        </button>
+
+        <button
+            onclick="openPage('queue', this)">
+            🧍 Queue Management
+        </button>
+
+        <button
+            onclick="openPage('alerts', this)">
+            ⚠ Alerts
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+
+<main class="content">
+
+
+<div class="topbar">
+
+    <h2 id="pageTitle">
+        Overview
+    </h2>
+
+    <div class="edge-badge">
+        LOCAL EDGE PROTOTYPE
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     OVERVIEW
+     ===================================================== -->
+
+<section
+    id="overview"
+    class="page active">
+
+
+<div class="metric-grid">
+
+
+    <div class="card">
+
+        <div class="metric-label">
+            Customers Inside
+        </div>
+
+        <div
+            class="metric-value"
+            id="customersMetric">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="metric-label">
+            Active Trolleys
+        </div>
+
+        <div
+            class="metric-value"
+            id="trolleysMetric">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="metric-label">
+            Queue
+        </div>
+
+        <div
+            class="metric-value"
+            id="queueMetric">
+            0 min
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="metric-label">
+            Low Stock
+        </div>
+
+        <div
+            class="metric-value"
+            id="lowMetric">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="metric-label">
+            Total Inventory
+        </div>
+
+        <div
+            class="metric-value"
+            id="inventoryMetric">
+            0
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="metric-label">
+            Alerts
+        </div>
+
+        <div
+            class="metric-value"
+            id="alertsMetric">
+            0
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="grid2">
+
+
+<div class="card">
+
+    <div class="section-title">
+        Shopper Traffic
+    </div>
+
+
+    <div class="zone">
+
+        <div class="zone-label">
+            Zone A
+        </div>
+
+        <div class="bar">
+
+            <div
+                class="bar-fill"
+                id="zoneBarA"
+                style="width:0%">
+            </div>
+
+        </div>
+
+        <b id="zoneValueA">
+            0
+        </b>
+
+    </div>
+
+
+    <div class="zone">
+
+        <div class="zone-label">
+            Zone B
+        </div>
+
+        <div class="bar">
+
+            <div
+                class="bar-fill"
+                id="zoneBarB"
+                style="width:0%">
+            </div>
+
+        </div>
+
+        <b id="zoneValueB">
+            0
+        </b>
+
+    </div>
+
+
+    <div class="zone">
+
+        <div class="zone-label">
+            Zone C
+        </div>
+
+        <div class="bar">
+
+            <div
+                class="bar-fill"
+                id="zoneBarC"
+                style="width:0%">
+            </div>
+
+        </div>
+
+        <b id="zoneValueC">
+            0
+        </b>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <div class="section-title">
+        Active Trolleys
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Trolley</th>
+                <th>Status</th>
+                <th>Items</th>
+                <th>Total</th>
+            </tr>
+
+        </thead>
+
+        <tbody
+            id="overviewTrolleys">
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</div>
+
+
+<div
+    class="card"
+    style="margin-top:16px">
+
+    <div class="section-title">
+        Recent Alerts
+    </div>
+
+    <div id="overviewAlerts">
+        No alerts
+    </div>
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     SMART TROLLEY
+     ===================================================== -->
+
+<section
+    id="trolley"
+    class="page">
+
+
+<div class="trolley-container">
+
+
+<div class="card">
+
+    <div class="section-title">
+        Smart Trolley
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Trolley
+        </label>
+
+        <select
+            id="trolleySelect"
+            onchange="loadTrolley()">
+
+            <option>
+                TROLLEY_01
+            </option>
+
+            <option>
+                TROLLEY_02
+            </option>
+
+            <option>
+                TROLLEY_03
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Barcode
+        </label>
+
+        <input
+            id="barcodeInput"
+            class="big-input"
+            autofocus
+            autocomplete="off"
+            placeholder="Scan barcode and press Enter">
+
+    </div>
+
+
+    <div
+        id="scanMessage"
+        class="message">
+    </div>
+
+
+    <div class="demo-note">
+
+        For testing without a real scanner:
+
+        <br><br>
+
+        <b>Chips</b>:
+        890100000001
+
+        <br>
+
+        <b>Biscuits</b>:
+        890100000002
+
+        <br>
+
+        <b>Sprite</b>:
+        890100000003
+
+    </div>
+
+
+    <div
+        class="button-row"
+        style="margin-top:12px">
+
+        <button
+            class="secondary"
+            onclick="demoScan('890100000001')">
+            Scan Chips
+        </button>
+
+        <button
+            class="secondary"
+            onclick="demoScan('890100000002')">
+            Scan Biscuits
+        </button>
+
+        <button
+            class="secondary"
+            onclick="demoScan('890100000003')">
+            Scan Sprite
+        </button>
+
+        <button
+            class="secondary"
+            onclick="demoScan('890100000004')">
+            Scan Soap
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <div class="section-title">
+        My Cart
+    </div>
+
+
+    <div id="cartItems">
+        Cart is empty
+    </div>
+
+
+    <div class="cart-total">
+
+        <span>
+            TOTAL
+        </span>
+
+        <span>
+            ₹<span id="cartTotal">
+                0.00
+            </span>
+        </span>
+
+    </div>
+
+
+    <div
+        class="button-row"
+        style="margin-top:18px">
+
+        <button
+            class="primary"
+            onclick="checkout()">
+            Checkout
+        </button>
+
+        <button
+            class="secondary"
+            onclick="loadTrolley()">
+            Refresh
+        </button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     INVENTORY
+     ===================================================== -->
+
+<section
+    id="inventory"
+    class="page">
+
+
+<div class="card">
+
+    <div class="section-title">
+        Live Inventory
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Product
+                </th>
+
+                <th>
+                    Category
+                </th>
+
+                <th>
+                    Price
+                </th>
+
+                <th>
+                    Shelf
+                </th>
+
+                <th>
+                    Stock
+                </th>
+
+                <th>
+                    Threshold
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody
+            id="inventoryTable">
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     SHELF AI
+     ===================================================== -->
+
+<section
+    id="shelf"
+    class="page">
+
+
+<div class="grid2">
+
+
+<div class="card">
+
+    <div class="section-title">
+        Shelf AI Demo
+    </div>
+
+
+    <div class="small">
+
+        This simulates what your shelf camera
+        will eventually send after YOLO detection.
+
+    </div>
+
+
+    <br>
+
+
+    <div class="form-group">
+
+        <label>
+            Product
+        </label>
+
+        <select id="shelfProduct">
+
+            <option value="890100000001">
+                Potato Chips
+            </option>
+
+            <option value="890100000002">
+                Biscuits
+            </option>
+
+            <option value="890100000003">
+                Sprite
+            </option>
+
+            <option value="890100000004">
+                Bath Soap
+            </option>
+
+            <option value="890100000005">
+                Milk Pack
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Detected Shelf
+        </label>
+
+        <select id="detectedShelf">
+
+            <option>
+                SHELF_A
+            </option>
+
+            <option>
+                SHELF_B
+            </option>
+
+            <option>
+                SHELF_C
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <button
+        class="primary"
+        onclick="runShelfAI()">
+
+        Run Shelf Check
+
+    </button>
+
+
+    <div
+        id="shelfMessage"
+        class="message">
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <div class="section-title">
+        Shelf AI Workflow
+    </div>
+
+
+    <p>
+        Camera
+        →
+        YOLO
+        →
+        Product Detection
+    </p>
+
+
+    <p>
+        Product Position
+        →
+        Expected Shelf
+        →
+        Mismatch Check
+    </p>
+
+
+    <p>
+        Wrong position
+        →
+        Alert
+        →
+        Management Dashboard
+    </p>
+
+
+    <div class="demo-note">
+
+        Later, your real shelf camera will
+        automatically call the same backend API.
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     SHOPPER ANALYTICS
+     ===================================================== -->
+
+<section
+    id="shopper"
+    class="page">
+
+
+    <div class="grid2">
+
+
+        <!-- LEFT: SHOPPER ANALYTICS SIMULATOR -->
+
+        <div class="card">
+
+            <div class="section-title">
+                Shopper Analytics Simulator
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Customers Inside
+                </label>
+
+                <input
+                    id="shopperCustomers"
+                    type="number"
+                    value="10"
+                    min="0">
+
+            </div>
+
+
+            <div class="grid3">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Zone A
+                    </label>
+
+                    <input
+                        id="shopperA"
+                        type="number"
+                        value="3"
+                        min="0">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Zone B
+                    </label>
+
+                    <input
+                        id="shopperB"
+                        type="number"
+                        value="5"
+                        min="0">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Zone C
+                    </label>
+
+                    <input
+                        id="shopperC"
+                        type="number"
+                        value="2"
+                        min="0">
+
+                </div>
+
+
+            </div>
+
+
+            <!-- DWELL TIME -->
+
+            <div class="form-group">
+
+                <label>
+                    Average Dwell Time (seconds)
+                </label>
+
+                <input
+                    id="shopperDwell"
+                    type="number"
+                    value="120"
+                    min="0">
+
+            </div>
+
+
+            <button
+                class="primary"
+                onclick="updateShopper()">
+
+                Update Analytics
+
+            </button>
+
+        </div>
+
+
+        <!-- RIGHT: CURRENT SHOPPER METRICS -->
+
+        <div class="card">
+
+            <div class="section-title">
+                Current Shopper Metrics
+            </div>
+
+
+            <div class="metric-value">
+
+                <span id="shopperLive">
+                    0
+                </span>
+
+            </div>
+
+            <div class="small">
+                Customers inside
+            </div>
+
+
+            <br>
+
+
+            Zone A:
+            <b id="shopperLiveA">
+                0
+            </b>
+
+
+            <br><br>
+
+
+            Zone B:
+            <b id="shopperLiveB">
+                0
+            </b>
+
+
+            <br><br>
+
+
+            Zone C:
+            <b id="shopperLiveC">
+                0
+            </b>
+
+
+            <br><br>
+
+
+            Average Dwell Time:
+            <b id="shopperLiveDwell">
+                0
+            </b>
+
+            seconds
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     QUEUE
+     ===================================================== -->
+
+<section
+    id="queue"
+    class="page">
+
+
+<div class="grid2">
+
+
+<div class="card">
+
+    <div class="section-title">
+        Queue Management
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            People in Queue
+        </label>
+
+        <input
+            id="queuePeople"
+            type="number"
+            value="5"
+            min="0">
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Active Counters
+        </label>
+
+        <input
+            id="queueCounters"
+            type="number"
+            value="1"
+            min="1">
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Average Service Time (seconds)
+        </label>
+
+        <input
+            id="queueService"
+            type="number"
+            value="60"
+            min="1">
+
+    </div>
+
+
+    <button
+        class="primary"
+        onclick="updateQueue()">
+
+        Update Queue
+
+    </button>
+
+</div>
+
+
+<div class="card">
+
+    <div class="section-title">
+        Current Queue
+    </div>
+
+
+    <div
+        class="metric-value"
+        id="queueLive">
+
+        0 min
+
+    </div>
+
+
+    <div
+        class="small"
+        id="queueDetails">
+
+        0 people
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- =====================================================
+     ALERTS
+     ===================================================== -->
+
+<section
+    id="alerts"
+    class="page">
+
+
+<div class="card">
+
+    <div class="section-title">
+        Alerts
+    </div>
+
+
+    <div id="alertsList">
+
+        No alerts
+
+    </div>
+
+</div>
+
+
+<div
+    class="card"
+    style="margin-top:16px">
+
+    <button
+        class="danger"
+        onclick="resetDemo()">
+
+        Reset Complete Demo
+
+    </button>
+
+</div>
+
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<script>
+
+
+// =======================================================
+// GLOBAL
+// =======================================================
+
+let currentTrolley =
+    "TROLLEY_01";
+
+
+// =======================================================
+// PAGE NAVIGATION
+// =======================================================
+
+function openPage(
+    page,
+    button
+) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            pageElement => {
+
+                pageElement
+                    .classList
+                    .remove("active");
+
+            }
+        );
+
+
+    document
+        .getElementById(page)
+        .classList
+        .add("active");
+
+
+    document
+        .querySelectorAll(".nav button")
+        .forEach(
+            navButton => {
+
+                navButton
+                    .classList
+                    .remove("active");
+
+            }
+        );
+
+
+    button
+        .classList
+        .add("active");
+
+
+    const titles = {
+
+        overview:
+            "Overview",
+
+        trolley:
+            "Smart Trolley",
+
+        inventory:
+            "Inventory",
+
+        shelf:
+            "Shelf AI",
+
+        shopper:
+            "Shopper Analytics",
+
+        queue:
+            "Queue Management",
+
+        alerts:
+            "Alerts"
+
+    };
+
+
+    document
+        .getElementById("pageTitle")
+        .textContent =
+        titles[page];
+
+}
+
+
+// =======================================================
+// BARCODE INPUT
+// =======================================================
+
+document
+    .getElementById("barcodeInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key
+                !==
+                "Enter"
+            ) {
+
+                return;
+
+            }
+
+
+            const barcode =
+                this.value.trim();
+
+
+            this.value =
+                "";
+
+
+            if (barcode) {
+
+                scanProduct(
+                    barcode
+                );
+
+            }
+
+        }
+    );
+
+
+// =======================================================
+// SCAN PRODUCT
+// =======================================================
+
+async function scanProduct(
+    barcode
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/scan",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            trolley_id:
+                                currentTrolley,
+
+                            barcode:
+                                barcode
+
+                        })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !response.ok
+        ) {
+
+            throw new Error(
+                data.detail
+                ||
+                "Scan failed"
+            );
+
+        }
+
+
+        document
+            .getElementById(
+                "scanMessage"
+            )
+            .innerHTML =
+
+            `<span class="success">
+                ✓ ${data.product.name}
+                added to trolley
+             </span>`;
+
+
+        renderCart(
+            data.cart
+        );
+
+
+        await loadDashboard();
+
+
+        document
+            .getElementById(
+                "barcodeInput"
+            )
+            .focus();
+
+
+    }
+
+    catch (error) {
+
+        document
+            .getElementById(
+                "scanMessage"
+            )
+            .innerHTML =
+
+            `<span class="error">
+                ✕ ${error.message}
+             </span>`;
+
+    }
+
+}
+
+
+// =======================================================
+// DEMO SCAN
+// =======================================================
+
+function demoScan(
+    barcode
+) {
+
+    scanProduct(
+        barcode
+    );
+
+}
+
+
+// =======================================================
+// LOAD TROLLEY
+// =======================================================
+
+async function loadTrolley() {
+
+    currentTrolley =
+        document
+            .getElementById(
+                "trolleySelect"
+            )
+            .value;
+
+
+    const response =
+        await fetch(
+            `/api/trolley/${currentTrolley}`
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if (
+        !response.ok
+    ) {
+
+        alert(
+            data.detail
+            ||
+            "Could not load trolley"
+        );
+
+        return;
+
+    }
+
+
+    renderCart(
+        data
+    );
+
+}
+
+
+// =======================================================
+// RENDER CART
+// =======================================================
+
+function renderCart(
+    cart
+) {
+
+    const container =
+        document
+            .getElementById(
+                "cartItems"
+            );
+
+
+    document
+        .getElementById(
+            "cartTotal"
+        )
+        .textContent =
+        Number(
+            cart.total
+        ).toFixed(2);
+
+
+    if (
+        !cart.items
+        ||
+        cart.items.length === 0
+    ) {
+
+        container.innerHTML =
+            `<div class="small">
+                Cart is empty.
+                Scan a product to start.
+             </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        "";
+
+
+    cart.items.forEach(
+        item => {
+
+            const element =
+                document
+                    .createElement(
+                        "div"
+                    );
+
+
+            element.className =
+                "cart-item";
+
+
+            element.innerHTML = `
+
+                <div>
+
+                    <div
+                        class="cart-item-title">
+
+                        ${item.name}
+
+                    </div>
+
+                    <div
+                        class="cart-item-meta">
+
+                        ${item.category}
+
+                        • Qty:
+                        ${item.quantity}
+
+                        • ₹${Number(
+                            item.price
+                        ).toFixed(2)}
+
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <b>
+                        ₹${Number(
+                            item.line_total
+                        ).toFixed(2)}
+                    </b>
+
+                    <br>
+
+                    <button
+                        class="secondary"
+                        style="margin-top:6px"
+                        onclick="removeProduct(
+                            '${item.barcode}'
+                        )">
+
+                        Remove 1
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container
+                .appendChild(
+                    element
+                );
+
+        }
+    );
+
+}
+
+
+// =======================================================
+// REMOVE PRODUCT
+// =======================================================
+
+async function removeProduct(
+    barcode
+) {
+
+    const response =
+        await fetch(
+            "/api/remove",
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify({
+
+                        trolley_id:
+                            currentTrolley,
+
+                        barcode:
+                            barcode
+
+                    })
+
+            }
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if (
+        !response.ok
+    ) {
+
+        alert(
+            data.detail
+            ||
+            "Remove failed"
+        );
+
+        return;
+
+    }
+
+
+    renderCart(
+        data
+    );
+
+
+    loadDashboard();
+
+}
+
+
+// =======================================================
+// CHECKOUT
+// =======================================================
+
+async function checkout() {
+
+    const response =
+        await fetch(
+            `/api/checkout/${currentTrolley}`,
+            {
+
+                method:
+                    "POST"
+
+            }
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if (
+        !response.ok
+    ) {
+
+        alert(
+            data.detail
+            ||
+            "Checkout failed"
+        );
+
+        return;
+
+    }
+
+
+    renderCart({
+
+        items: [],
+
+        total: 0
+
+    });
+
+
+    document
+        .getElementById(
+            "scanMessage"
+        )
+        .innerHTML =
+
+        `<span class="success">
+            ✓ Checkout completed.
+            Total: ₹${Number(
+                data.total
+            ).toFixed(2)}
+         </span>`;
+
+
+    loadDashboard();
+
+}
+
+
+// =======================================================
+// DASHBOARD
+// =======================================================
+
+async function loadDashboard() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/dashboard"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        // =================================================
+        // MAIN METRICS
+        // =================================================
+
+        document
+            .getElementById(
+                "customersMetric"
+            )
+            .textContent =
+            data.customers_inside;
+
+
+        document
+            .getElementById(
+                "trolleysMetric"
+            )
+            .textContent =
+            data.active_trolleys;
+
+
+        document
+            .getElementById(
+                "queueMetric"
+            )
+            .textContent =
+            data.queue.wait_minutes
+            + " min";
+
+
+        document
+            .getElementById(
+                "lowMetric"
+            )
+            .textContent =
+            data.low_stock;
+
+
+        document
+            .getElementById(
+                "inventoryMetric"
+            )
+            .textContent =
+            data.total_inventory;
+
+
+        document
+            .getElementById(
+                "alertsMetric"
+            )
+            .textContent =
+            data.alerts.length;
+
+
+        // =================================================
+        // ZONE DATA
+        // =================================================
+
+        updateZones(
+            data.zones
+        );
+
+
+        // =================================================
+        // TROLLEYS
+        // =================================================
+
+        renderTrolleys(
+            data.trolleys
+        );
+
+
+        // =================================================
+        // INVENTORY
+        // =================================================
+
+        renderInventory(
+            data.inventory
+        );
+
+
+        // =================================================
+        // ALERTS
+        // =================================================
+
+        renderAlerts(
+            data.alerts,
+            "overviewAlerts"
+        );
+
+
+        renderAlerts(
+            data.alerts,
+            "alertsList"
+        );
+
+
+        // =================================================
+        // SHOPPER PAGE
+        // =================================================
+
+        document
+            .getElementById(
+                "shopperLive"
+            )
+            .textContent =
+            data.customers_inside;
+
+
+        document
+            .getElementById(
+                "shopperLiveA"
+            )
+            .textContent =
+            data.zones.zone_a;
+
+
+        document
+            .getElementById(
+                "shopperLiveB"
+            )
+            .textContent =
+            data.zones.zone_b;
+
+
+        document
+            .getElementById(
+                "shopperLiveC"
+            )
+            .textContent =
+            data.zones.zone_c;
+
+
+        // =================================================
+        // AVERAGE DWELL TIME
+        // =================================================
+
+        document
+            .getElementById(
+                "shopperLiveDwell"
+            )
+            .textContent =
+            Number(
+                data.average_dwell_seconds || 0
+            ).toFixed(1);
+
+
+        // =================================================
+        // QUEUE PAGE
+        // =================================================
+
+        document
+            .getElementById(
+                "queueLive"
+            )
+            .textContent =
+            data.queue.wait_minutes
+            + " min";
+
+
+        document
+            .getElementById(
+                "queueDetails"
+            )
+            .textContent =
+
+            `${data.queue.people}
+             people •
+             ${data.queue.counters}
+             counter(s) •
+             ${data.queue.average_service_seconds}s
+             average service`;
+
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Dashboard error:",
+            error
+        );
+
+    }
+
+}
+
+
+// =======================================================
+// ZONES
+// =======================================================
+
+function updateZones(
+    zones
+) {
+
+    const values = [
+
+        zones.zone_a,
+
+        zones.zone_b,
+
+        zones.zone_c
+
+    ];
+
+
+    const maximum =
+        Math.max(
+            ...values,
+            1
+        );
+
+
+    document
+        .getElementById(
+            "zoneBarA"
+        )
+        .style
+        .width =
+
+        (
+            values[0]
+            /
+            maximum
+        )
+        *
+        100
+        +
+        "%";
+
+
+    document
+        .getElementById(
+            "zoneBarB"
+        )
+        .style
+        .width =
+
+        (
+            values[1]
+            /
+            maximum
+        )
+        *
+        100
+        +
+        "%";
+
+
+    document
+        .getElementById(
+            "zoneBarC"
+        )
+        .style
+        .width =
+
+        (
+            values[2]
+            /
+            maximum
+        )
+        *
+        100
+        +
+        "%";
+
+
+    document
+        .getElementById(
+            "zoneValueA"
+        )
+        .textContent =
+        values[0];
+
+
+    document
+        .getElementById(
+            "zoneValueB"
+        )
+        .textContent =
+        values[1];
+
+
+    document
+        .getElementById(
+            "zoneValueC"
+        )
+        .textContent =
+        values[2];
+
+}
+
+
+// =======================================================
+// INVENTORY
+// =======================================================
+
+function renderInventory(
+    inventory
+) {
+
+    const table =
+        document
+            .getElementById(
+                "inventoryTable"
+            );
+
+
+    table.innerHTML =
+        "";
+
+
+    inventory.forEach(
+        item => {
+
+            const row =
+                document
+                    .createElement(
+                        "tr"
+                    );
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <b>
+                        ${item.name}
+                    </b>
+
+                    <div
+                        class="small">
+
+                        ${item.sku}
+
+                    </div>
+
+                </td>
+
+                <td>
+                    ${item.category}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        item.price
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+                    ${item.shelf}
+                </td>
+
+                <td>
+                    ${item.stock}
+                </td>
+
+                <td>
+                    ${item.threshold}
+                </td>
+
+                <td class="${
+                    item.low_stock
+                    ? "bad"
+                    : "good"
+                }">
+
+                    ${item.status}
+
+                </td>
+
+            `;
+
+
+            table.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+// =======================================================
+// TROLLEYS
+// =======================================================
+
+function renderTrolleys(
+    trolleys
+) {
+
+    const table =
+        document
+            .getElementById(
+                "overviewTrolleys"
+            );
+
+
+    table.innerHTML =
+        "";
+
+
+    trolleys.forEach(
+        trolley => {
+
+            const row =
+                document
+                    .createElement(
+                        "tr"
+                    );
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${trolley.trolley_id}
+                </td>
+
+                <td>
+                    ${trolley.status}
+                </td>
+
+                <td>
+                    ${trolley.items}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        trolley.total
+                    ).toFixed(2)}
+                </td>
+
+            `;
+
+
+            table.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+// =======================================================
+// ALERTS
+// =======================================================
+
+function renderAlerts(
+    alerts,
+    targetId
+) {
+
+    const container =
+        document
+            .getElementById(
+                targetId
+            );
+
+
+    if (
+        !alerts
+        ||
+        alerts.length === 0
+    ) {
+
+        container.innerHTML =
+            `<div class="small">
+                No alerts
+             </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        "";
+
+
+    alerts.forEach(
+        alert => {
+
+            const div =
+                document
+                    .createElement(
+                        "div"
+                    );
+
+
+            div.className =
+                "alert";
+
+
+            if (
+                alert.type
+                ===
+                "MISPLACED_PRODUCT"
+            ) {
+
+                div.classList
+                    .add(
+                        "alert-danger"
+                    );
+
+            }
+
+
+            div.innerHTML = `
+
+                <b>
+                    ${alert.type
+                        .replaceAll(
+                            "_",
+                            " "
+                        )}
+                </b>
+
+                <br>
+
+                ${alert.message}
+
+                <div
+                    class="small">
+
+                    ${alert.created_at}
+
+                </div>
+
+            `;
+
+
+            container
+                .appendChild(
+                    div
+                );
+
+        }
+    );
+
+}
+
+
+// =======================================================
+// SHELF AI
+// =======================================================
+
+async function runShelfAI() {
+
+    const barcode =
+        document
+            .getElementById(
+                "shelfProduct"
+            )
+            .value;
+
+
+    const shelf =
+        document
+            .getElementById(
+                "detectedShelf"
+            )
+            .value;
+
+
+    const response =
+        await fetch(
+            "/api/return",
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body:
+                    JSON.stringify({
+
+                        trolley_id:
+                            currentTrolley,
+
+                        barcode:
+                            barcode,
+
+                        detected_shelf:
+                            shelf
+
+                    })
+
+            }
+        );
+
+
+    const data =
+        await response.json();
+
+
+    const message =
+        document
+            .getElementById(
+                "shelfMessage"
+            );
+
+
+    if (
+        !response.ok
+    ) {
+
+        message.innerHTML =
+            `<span class="error">
+                ${data.detail}
+             </span>`;
+
+        return;
+
+    }
+
+
+    if (
+        data.result
+        ===
+        "MISPLACED"
+    ) {
+
+        message.innerHTML =
+            `<span class="error">
+                ⚠ Misplaced product.
+                Expected:
+                ${data.expected_shelf}
+                Detected:
+                ${data.detected_shelf}
+             </span>`;
+
+    }
+
+    else {
+
+        message.innerHTML =
+            `<span class="success">
+                ✓ Product is on the correct shelf.
+             </span>`;
+
+    }
+
+
+    loadDashboard();
+
+}
+
+
+// =======================================================
+// SHOPPER UPDATE
+// =======================================================
+
+async function updateShopper() {
+
+    await fetch(
+        "/api/shopper",
+        {
+
+            method:
+                "POST",
+
+            headers: {
+
+                "Content-Type":
+                    "application/json"
+
+            },
+
+            body:
+                JSON.stringify({
+
+                    customers_inside:
+                        Number(
+                            document
+                                .getElementById(
+                                    "shopperCustomers"
+                                )
+                                .value
+                        ),
+
+                    zone_a:
+                        Number(
+                            document
+                                .getElementById(
+                                    "shopperA"
+                                )
+                                .value
+                        ),
+
+                    zone_b:
+                        Number(
+                            document
+                                .getElementById(
+                                    "shopperB"
+                                )
+                                .value
+                        ),
+
+                    zone_c:
+                        Number(
+                            document
+                                .getElementById(
+                                    "shopperC"
+                                )
+                                .value
+                        ),
+
+                    average_dwell_seconds:
+                        Number(
+                            document
+                                .getElementById(
+                                    "shopperDwell"
+                                )
+                                .value
+                        )
+
+                })
+
+        }
+    );
+
+
+    loadDashboard();
+
+}
+
+
+// =======================================================
+// QUEUE UPDATE
+// =======================================================
+
+async function updateQueue() {
+
+    await fetch(
+        "/api/queue",
+        {
+
+            method:
+                "POST",
+
+            headers: {
+
+                "Content-Type":
+                    "application/json"
+
+            },
+
+            body:
+                JSON.stringify({
+
+                    people:
+                        Number(
+                            document
+                                .getElementById(
+                                    "queuePeople"
+                                )
+                                .value
+                        ),
+
+                    active_counters:
+                        Number(
+                            document
+                                .getElementById(
+                                    "queueCounters"
+                                )
+                                .value
+                        ),
+
+                    average_service_seconds:
+                        Number(
+                            document
+                                .getElementById(
+                                    "queueService"
+                                )
+                                .value
+                        )
+
+                })
+
+        }
+    );
+
+
+    loadDashboard();
+
+}
+
+
+// =======================================================
+// RESET
+// =======================================================
+
+async function resetDemo() {
+
+    const confirmed =
+        confirm(
+            "Reset the complete RetailEdge AI demo?"
+        );
+
+
+    if (!confirmed) {
+
+        return;
+
+    }
+
+
+    await fetch(
+        "/api/reset",
+        {
+            method:
+                "POST"
+        }
+    );
+
+
+    loadTrolley();
+
+    loadDashboard();
+
+
+    document
+        .getElementById(
+            "scanMessage"
+        )
+        .textContent =
+        "";
+
+
+    alert(
+        "Demo reset successfully."
+    );
+
+}
+
+
+// =======================================================
+// AUTO REFRESH
+// =======================================================
+
+loadDashboard();
+
+loadTrolley();
+
+
+// Refresh every 1 second.
+// This makes the trolley/dashboard feel real-time
+// without requiring heavy WebSocket infrastructure.
+
+setInterval(
+    loadDashboard,
+    1000
+);
+
+
+setInterval(
+    loadTrolley,
+    1000
+);
+
+
+</script>
+
+
+</body>
+
+</html>
